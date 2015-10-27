@@ -1,3 +1,4 @@
+import wordcram.*;
 void setup() {
   size(1000, 1000);
   background(255);
@@ -7,19 +8,30 @@ void setup() {
 }
 
 int[] totalWords = new int[] {
-  100, 180, 100, 80, 120, 100, 190, 170, 110, 70, 180, 140,  100, 180, 100, 80, 120, 100, 190, 170, 110, 70, 180, 140
+  100, 180, 100, 80, 120, 100, 190, 170, 110, 70, 180, 140, 100, 180, 100, 80, 120, 100, 190, 170, 110, 70, 180, 140
 };
 IntList words = new IntList(totalWords);
 int[] totalCurses = new int[] {
-  10, 20, 7, 25, 5, 2, 27, 5, 25, 30, 18, 12,10, 20, 7, 25, 5, 2, 27, 5, 25, 30, 18, 12
+  10, 20, 7, 25, 5, 2, 27, 5, 25, 30, 18, 12, 10, 20, 7, 25, 5, 2, 27, 5, 25, 30, 18, 12
 };
 IntList curses = new IntList(totalCurses);
-int radiusOfInner = 300;
+Word[] wordArray = new Word[] {
+  new Word("Hello", 100), 
+  new Word("WordCram", 60)
+  };
+
+  int radiusOfInner = 300;
+
+boolean drawCurses = true;
+
+
 
 void draw() {
   translate(width/2, height/2);
   rotate(PI);
   ellipse(0, 0, width-10, height-10); //outer circle
+  ellipse(0, 0, radiusOfInner*2, radiusOfInner*2); //inner circle
+
   //Total amount of words
   beginShape();
   for (int i=0; i<words.size (); i++) {
@@ -32,6 +44,7 @@ void draw() {
     curveVertex(sin((TWO_PI/words.size())*i)*(words.get(i)+radiusOfInner), cos((TWO_PI/words.size())*i)*(words.get(i)+radiusOfInner));
   }
   endShape();
+
   //Total amount of curses
   beginShape();
   for (int i=0; i<curses.size (); i++) {
@@ -44,6 +57,13 @@ void draw() {
     curveVertex(sin((TWO_PI/curses.size())*i)*(curses.get(i)+radiusOfInner), cos((TWO_PI/curses.size())*i)*(curses.get(i)+radiusOfInner));
   }
   endShape();
-  ellipse(0, 0, radiusOfInner*2, radiusOfInner*2); //inner circle
+
+  //Wordcloud
+  if (drawCurses) {
+    WordCram wordcram = new WordCram(this)
+      .fromWords(wordArray);
+    wordcram.drawAll();
+    drawCurses=false;
+  }
 } 
 
