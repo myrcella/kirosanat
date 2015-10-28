@@ -5,6 +5,7 @@ void setup() {
   stroke(0);
   strokeWeight(2);
   noFill();
+ 
 }
 
 int[] totalWords = new int[] {
@@ -24,9 +25,18 @@ Word[] wordArray = new Word[] {
 
 boolean drawCurses = true;
 
-
+WordPlacer onDiagonal() {
+  return new WordPlacer() {
+    public PVector place(Word word, int rank, int wordCount,
+                         int wordWidth, int wordHeight, 
+                         int fieldWidth, int fieldHeight) {
+      return new PVector(width/2-radiusOfInner/2, height/2-radiusOfInner/2);
+    }
+  };
+}
 
 void draw() {
+  pushMatrix();
   translate(width/2, height/2);
   rotate(PI);
   ellipse(0, 0, width-10, height-10); //outer circle
@@ -57,11 +67,13 @@ void draw() {
     curveVertex(sin((TWO_PI/curses.size())*i)*(curses.get(i)+radiusOfInner), cos((TWO_PI/curses.size())*i)*(curses.get(i)+radiusOfInner));
   }
   endShape();
+  popMatrix();
 
   //Wordcloud
   if (drawCurses) {
     WordCram wordcram = new WordCram(this)
-      .fromWords(wordArray);
+      .fromWords(wordArray)
+      .withPlacer(onDiagonal());
     wordcram.drawAll();
     drawCurses=false;
   }
