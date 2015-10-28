@@ -6,11 +6,13 @@ Capture cam;
 float brightestX = 0;
 float brightestY = 0;
 
+
 int dimension = 800;
 int radiusOfInner = 200;
 int radiusOfOuter = dimension/2-40;
 int selectedHour = 0;
 int maxValue = 190;
+int currentX = 0;
 
 
 boolean changeHour = false;
@@ -27,14 +29,15 @@ void setup() {
 }
 
 void draw() {
-  drawDetails();
+  background(255);
   pushMatrix();
   translate(dimension/2, dimension/2+35);
   rotate(PI + (selectedHour * (PI / 12))); // rotates according to the selected Hour
-  drawCircles();
   drawTotalWords();
   drawTotalCurses();
+  drawCircles();
   popMatrix();
+  drawDetails();
   drawWordCloud();
 } 
 
@@ -50,20 +53,27 @@ void keyReleased() {
   }
 }
 
-/*void keyPressed() {
- if (key == CODED) {
- if (keyCode == SHIFT) {
- if(selectedHour < 22){
- selectedHour+=mouseX;
- } else {
- selectedHour = 0;
- }
- redraw();
- }
- }
- }*/
-
-int scaleValue(int number) {
-  return round(((float)number/(float)maxValue)*((float)radiusOfOuter-(float)radiusOfInner));
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == SHIFT) {
+      if (currentX < mouseX) {
+        if (selectedHour < 22) {
+          selectedHour+=1;
+        } else {
+          selectedHour = 0;
+        }
+        currentX = mouseX;
+      } else {
+        if (selectedHour > 0) {
+          selectedHour += -1;
+        } else {
+          selectedHour = 23;
+        }
+        currentX = mouseX;
+      }
+      redraw();
+    }
+  }
 }
+
 
