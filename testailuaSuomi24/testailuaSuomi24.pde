@@ -78,8 +78,7 @@ void keyReleased() {
     selectedHour += 1;
     } else {
     selectedHour = 0;
-    }
-    
+    }    
     redraw();
   }
 }
