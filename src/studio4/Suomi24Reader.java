@@ -20,6 +20,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javafx.util.Pair;
+
 
 
 public class Suomi24Reader {
@@ -54,13 +56,13 @@ public class Suomi24Reader {
 		calculateTotalCurses();
 		System.out.println(((double)((System.nanoTime() - start)/1000000000.0)));
 		makePairMaps();
-//		System.out.println(((double)((System.nanoTime() - start)/1000000000.0)));
-//		for (Integer key: cursesByTime.keySet()) {
-//			System.out.println(totalCurses[key]);
-//			System.out.println(cursesAsPairs.get(key).word);
-//				System.out.println(totalWords[key]);
-//					System.out.println(key + "    Enjoy:    " + cursesByTime.get(key));
-//		}
+		System.out.println(((double)((System.nanoTime() - start)/1000000000.0)));
+		for (Integer key: cursesByTime.keySet()) {
+			System.out.println(totalCurses[key]);
+			//System.out.println(cursesAsPairs.get(key).word);
+				System.out.println(totalWords[key]);
+					System.out.println(key + "    Enjoy:    " + cursesByTime.get(key));
+		}
 
 	}
 
@@ -120,14 +122,14 @@ public class Suomi24Reader {
 
 	private void processInputfile (Map<Integer, Map<String, Integer>> group) {
 		try {
-			File dir = new File("E:/Suomi24/2015/01");
+			File dir = new File("src/testresources");
 			File[] directoryListing = dir.listFiles();
 			if (directoryListing != null) {
 				int count = 0;
 				for (File child : directoryListing) {
 
 					FileReader reader = new FileReader(child.getPath());
-
+					System.out.println(child.getPath());
 					JSONParser jsonParser = new JSONParser();
 					JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
 					JSONObject originalData = (JSONObject)jsonObject.get("data");
