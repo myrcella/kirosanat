@@ -8,7 +8,7 @@ float brightestY = 0;
 
 int dimension = 800;
 int radiusOfInner = 200;
-int radiusOfOuter = dimension/2-20;
+int radiusOfOuter = dimension/2-40;
 int selectedHour = 0;
 int maxValue = 190;
 
@@ -20,6 +20,7 @@ void setup() {
   //cam = new Capture(this, width, height);
   //cam.start();
   stroke(0);
+  textSize(30);
   strokeWeight(2);
   noFill();
   noLoop();
@@ -27,8 +28,12 @@ void setup() {
 
 void draw() {
   background(255);
+  fill(0);
+  triangle(dimension/2-8, 40, dimension/2+8,40, dimension/2, 80);
+  text(selectedHour+":00",dimension/2-25,30); 
+  noFill();
   pushMatrix();
-  translate(width/2, height/2);
+  translate(width/2, height/2+35);
   rotate(PI + (selectedHour * (PI / 12))); // rotates according to the selected Hour
   ellipse(0, 0, radiusOfOuter*2, radiusOfOuter*2); //outer circle
   ellipse(0, 0, radiusOfInner*2, radiusOfInner*2); //inner circle
@@ -58,13 +63,12 @@ void draw() {
     curveVertex(sin((TWO_PI/curses.size())*i)*(scaleValue(curses.get(i))+radiusOfInner), cos((TWO_PI/curses.size())*i)*(scaleValue(curses.get(i))+radiusOfInner));
   }
   endShape();
+  
   popMatrix();
-
   WordCram wordcram = new WordCram(this)
     .fromWords(wordArray)
     .withPlacer(middle());
   wordcram.drawAll();
-
 } 
 
 
