@@ -1,4 +1,10 @@
 import wordcram.*;
+import processing.video.*;
+
+Capture cam;
+//The brightest pixels in the original video, not mirrowed!
+float brightestX = 0;
+float brightestY = 0;
 
 int radiusOfInner = 300;
 boolean drawCurses = true;
@@ -7,6 +13,8 @@ int selectedHour = 0;
 void setup() {
   size(1000, 1000);
   background(255);
+  cam = new Capture(this, width, height);
+  cam.start();
   stroke(0);
   strokeWeight(2);
   noFill(); 
