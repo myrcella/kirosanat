@@ -7,7 +7,9 @@ float brightestX = 0;
 float brightestY = 0;
 
 int radiusOfInner = 200;
+int radiusOfOuter = height/2-80;
 int selectedHour = 0;
+int maxValue = 200;
 
 boolean drawCurses = true;
 
@@ -27,32 +29,32 @@ void draw() {
   pushMatrix();
   translate(width/2, height/2);
   rotate(PI + (selectedHour * (PI / 12))); // rotates according to the selected Hour
-  ellipse(0, 0, width-10, height-10); //outer circle
+  ellipse(0, 0, radiusOfOuter*2, radiusOfOuter*2); //outer circle
   ellipse(0, 0, radiusOfInner*2, radiusOfInner*2); //inner circle
 
   //Total amount of words
   beginShape();
   for (int i=0; i<words.size (); i++) {
-    curveVertex(sin((TWO_PI/words.size())*i)*(words.get(i)+radiusOfInner), cos((TWO_PI/words.size())*i)*(words.get(i)+radiusOfInner));
+    curveVertex(sin((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner), cos((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner));
     stroke(255, 0, 0);
-    ellipse(sin((TWO_PI/words.size())*i)*(words.get(i)+radiusOfInner), cos((TWO_PI/words.size())*i)*(words.get(i)+radiusOfInner), 6, 6);
+    ellipse(sin((TWO_PI/words.size())*i)*(scaleValue(words.get(i)+radiusOfInner)), cos((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner), 6, 6);
     stroke(0);
   }
   for (int i=0; i<3; i++) {
-    curveVertex(sin((TWO_PI/words.size())*i)*(words.get(i)+radiusOfInner), cos((TWO_PI/words.size())*i)*(words.get(i)+radiusOfInner));
+    curveVertex(sin((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner), cos((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner));
   }
   endShape();
 
   //Total amount of curses
   beginShape();
   for (int i=0; i<curses.size (); i++) {
-    curveVertex(sin((TWO_PI/curses.size())*i)*(curses.get(i)+radiusOfInner), cos((TWO_PI/curses.size())*i)*(curses.get(i)+radiusOfInner));
+    curveVertex(sin((TWO_PI/curses.size())*i)*(scaleValue(curses.get(i))+radiusOfInner), cos((TWO_PI/curses.size())*i)*(scaleValue(curses.get(i))+radiusOfInner));
     stroke(255, 0, 0);
-    ellipse(sin((TWO_PI/curses.size())*i)*(curses.get(i)+radiusOfInner), cos((TWO_PI/curses.size())*i)*(curses.get(i)+radiusOfInner), 6, 6);
+    ellipse(sin((TWO_PI/curses.size())*i)*(scaleValue(curses.get(i))+radiusOfInner), cos((TWO_PI/curses.size())*i)*(scaleValue(curses.get(i))+radiusOfInner), 6, 6);
     stroke(0);
   }
   for (int i=0; i<3; i++) {
-    curveVertex(sin((TWO_PI/curses.size())*i)*(curses.get(i)+radiusOfInner), cos((TWO_PI/curses.size())*i)*(curses.get(i)+radiusOfInner));
+    curveVertex(sin((TWO_PI/curses.size())*i)*(scaleValue(curses.get(i))+radiusOfInner), cos((TWO_PI/curses.size())*i)*(scaleValue(curses.get(i))+radiusOfInner));
   }
   endShape();
   popMatrix();
@@ -77,4 +79,7 @@ void keyReleased() {
   }
 }
 
+int scaleValue(int number) {
+  return number/maxValue*(radiusOfOuter-radiusOfInner);
+}
 
