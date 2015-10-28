@@ -63,11 +63,18 @@ void drawDetails() {
 
 void drawCircles() {
   stroke(color(207, 207, 207));
+  strokeWeight(1);
   ellipse(0, 0, radiusOfOuter*2, radiusOfOuter*2); //outer circle
+  fill(color(207, 207, 207));
+  for (int i=0; i<24; i++) {
+    ellipseMode(CENTER);
+    ellipse(sin((TWO_PI/24)*i)*radiusOfOuter, cos((TWO_PI/24)*i)*radiusOfOuter, 5,5);
+  }
   fill(255);
   noStroke();
   ellipse(0, 0, radiusOfInner*2, radiusOfInner*2); //inner circle
   stroke(0);
+  strokeWeight(2);
 }
 
 int scaleValue(int number) {
