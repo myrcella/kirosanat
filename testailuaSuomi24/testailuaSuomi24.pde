@@ -14,8 +14,8 @@ boolean drawCurses = true;
 void setup() {
   size(800, 800);
   background(255);
-  cam = new Capture(this, width, height);
-  cam.start();
+  //cam = new Capture(this, width, height);
+  //cam.start();
   stroke(0);
   strokeWeight(2);
   noFill();
@@ -67,7 +67,12 @@ void draw() {
 
 void keyReleased() {
   if (key == 'r') {
+    if(selectedHour<24){
     selectedHour += 1;
+    } else {
+    selectedHour = 0;
+    }
+    
     redraw();
   }
 }
