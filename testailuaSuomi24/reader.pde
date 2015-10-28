@@ -247,11 +247,11 @@ public class Suomi24Reader {
     return totalEthnics; 
   }
   
-  public Integer[] getSexuals() {
+  public Integer[] getTotalSexuals() {
     return totalSexuals; 
   }
   
-  public Integer[] getGenerics() {
+  public Integer[] getTotalGenerics() {
     return totalGenerics; 
   }
   /*public static void main(String[] args) {
