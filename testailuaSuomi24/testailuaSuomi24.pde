@@ -1,38 +1,15 @@
 import wordcram.*;
+
+int radiusOfInner = 300;
+boolean drawCurses = true;
+int selectedHour = 0;
+
 void setup() {
   size(1000, 1000);
   background(255);
   stroke(0);
   strokeWeight(2);
-  noFill();
- 
-}
-
-int[] totalWords = new int[] {
-  100, 180, 100, 80, 120, 100, 190, 170, 110, 70, 180, 140, 100, 180, 100, 80, 120, 100, 190, 170, 110, 70, 180, 140
-};
-IntList words = new IntList(totalWords);
-int[] totalCurses = new int[] {
-  10, 20, 7, 25, 5, 2, 27, 5, 25, 30, 18, 12, 10, 20, 7, 25, 5, 2, 27, 5, 25, 30, 18, 12
-};
-IntList curses = new IntList(totalCurses);
-Word[] wordArray = new Word[] {
-  new Word("Hello", 100), 
-  new Word("WordCram", 60)
-  };
-
-  int radiusOfInner = 300;
-
-boolean drawCurses = true;
-
-WordPlacer onDiagonal() {
-  return new WordPlacer() {
-    public PVector place(Word word, int rank, int wordCount,
-                         int wordWidth, int wordHeight, 
-                         int fieldWidth, int fieldHeight) {
-      return new PVector(width/2-radiusOfInner/2, height/2-radiusOfInner/2);
-    }
-  };
+  noFill(); 
 }
 
 void draw() {
@@ -73,7 +50,7 @@ void draw() {
   if (drawCurses) {
     WordCram wordcram = new WordCram(this)
       .fromWords(wordArray)
-      .withPlacer(onDiagonal());
+      .withPlacer(middle());
     wordcram.drawAll();
     drawCurses=false;
   }
