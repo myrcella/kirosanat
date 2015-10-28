@@ -6,15 +6,16 @@ Capture cam;
 float brightestX = 0;
 float brightestY = 0;
 
+int dimension = 800;
 int radiusOfInner = 200;
-int radiusOfOuter = height/2-80;
+int radiusOfOuter = dimension/2-20;
 int selectedHour = 0;
-int maxValue = 200;
+int maxValue = 190;
 
 boolean drawCurses = true;
 
 void setup() {
-  size(800, 800);
+  size(dimension, dimension);
   background(255);
   //cam = new Capture(this, width, height);
   //cam.start();
@@ -37,7 +38,7 @@ void draw() {
   for (int i=0; i<words.size (); i++) {
     curveVertex(sin((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner), cos((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner));
     stroke(255, 0, 0);
-    ellipse(sin((TWO_PI/words.size())*i)*(scaleValue(words.get(i)+radiusOfInner)), cos((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner), 6, 6);
+    ellipse(sin((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner), cos((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner), 6, 6);
     stroke(0);
   }
   for (int i=0; i<3; i++) {
@@ -80,6 +81,6 @@ void keyReleased() {
 }
 
 int scaleValue(int number) {
-  return number/maxValue*(radiusOfOuter-radiusOfInner);
+  return round(((float)number/(float)maxValue)*((float)radiusOfOuter-(float)radiusOfInner));
 }
 
