@@ -77,6 +77,10 @@ void drawCircles() {
   strokeWeight(2);
 }
 
+void drawBackground() {
+background(color(11*selectedHour, 95*selectedHour, 197*selectedHour));
+}
+
 int scaleValue(int number) {
   return round(((float)number/(float)maxValue)*((float)radiusOfOuter-(float)radiusOfInner));
 }

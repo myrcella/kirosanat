@@ -29,10 +29,10 @@ void setup() {
 }
 
 void draw() {
-  background(255);
+  drawBackground();
   pushMatrix();
   translate(dimension/2, dimension/2+35);
-  rotate(PI + (selectedHour * (PI / 12))); // rotates according to the selected Hour
+  rotate(PI - (selectedHour * (PI / 12))); // rotates according to the selected Hour
   drawTotalWords();
   drawTotalCurses();
   drawCircles();
@@ -44,36 +44,41 @@ void draw() {
 
 void keyReleased() {
   if (key == 'r') {
-    if (selectedHour<24) {
+    if (selectedHour<23) {
       selectedHour += 1;
     } else {
       selectedHour = 0;
     }    
     redraw();
   }
-}
-
-void keyPressed() {
   if (key == CODED) {
     if (keyCode == SHIFT) {
-      if (currentX < mouseX) {
-        if (selectedHour < 22) {
-          selectedHour+=1;
-        } else {
-          selectedHour = 0;
-        }
-        currentX = mouseX;
-      } else {
-        if (selectedHour > 0) {
-          selectedHour += -1;
-        } else {
-          selectedHour = 23;
-        }
-        currentX = mouseX;
-      }
-      redraw();
+      moving = 0;
+      startingPoint=0;
     }
   }
 }
 
+int startingPoint = 0;
+int moving = 0;
+
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == SHIFT) {
+      moving = (int)round((float)(mouseX-startingPoint)/(float)400);          
+      if (moving == 0) {
+        startingPoint=mouseX;
+      } else {
+        if ((selectedHour < 22 && moving > 0) || (selectedHour > 0 && moving < 0)) {
+          selectedHour+= moving;
+        } else if (moving >  0) {
+          selectedHour = 0;
+        } else {
+          selectedHour = 23;
+        } 
+        redraw();
+      }
+    }
+  }
+}
 
