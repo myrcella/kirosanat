@@ -31,6 +31,7 @@ void setup() {
 }
 
 void draw() {
+  scroll();
   drawBackground();
   pushMatrix();
   translate(dimension/2, dimension/2+35);
@@ -40,7 +41,7 @@ void draw() {
   drawCircles();
   popMatrix();
   drawDetails();
-  drawWordCloud();
+  if (!moving) drawWordCloud();
 } 
 
 int startingPoint = 0;
@@ -61,11 +62,9 @@ void keyReleased() {
   if (key == 'r') {
     moving = false;
     noLoop();
+    draw();
   }
 }
-
-int startingPoint = 0;
-int moving = 0;
 
 void scroll() {
   if (moving) {
@@ -86,4 +85,5 @@ void scroll() {
       }
     }
   }
+  drawWordCloud();
 }
