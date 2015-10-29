@@ -68,23 +68,22 @@ int startingPoint = 0;
 int moving = 0;
 
 void scroll() {
-  //while (moving == true) {
-    println("jei");
-    if (moving) {
-      direction = mouseX-startingPoint;
-      if (direction > 0) { // if mouse is dragged to left
-        startingPoint = mouseX;
-        if (selectedHour<23) {
-          selectedHour += 1;
-        } else {
-          selectedHour = 0;
-        } else {
-          selectedHour = 23;
-        } 
-        redraw();
+  if (moving) {
+    direction = mouseX-startingPoint;
+    if (direction > 0) { // if mouse is dragged to left
+      startingPoint = mouseX;
+      if (selectedHour<23) {
+        selectedHour += 1;
+      } else {
+        selectedHour = 0;
+      }
+    } else if (direction < 0) { // if mouse is dragged to right
+      startingPoint = mouseX;
+      if (selectedHour>0) {
+        selectedHour -= 1;
+      } else {
+        selectedHour = 23;
       }
     }
-  //}
-  println("loppu");
+  }
 }
-
