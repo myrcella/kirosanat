@@ -52,20 +52,20 @@ void keyPressed() {
   if (key == 'r') {
     startingPoint = mouseX;
     moving = true;
-    //loop();
+    loop();
   }
 }
 
 void keyReleased() {
   if (key == 'r') {
     moving = false;
-    //noLoop();
+    noLoop();
   }
 }
 
 
 void scroll() {
-  while (moving == true) {
+  //while (moving == true) {
     println("jei");
     if (moving) {
       direction = mouseX-startingPoint;
@@ -87,7 +87,7 @@ void scroll() {
         drawDetails();
       }
     }
-  }
+  //}
   println("loppu");
 }
 
