@@ -43,27 +43,31 @@ void draw() {
   drawWordCloud();
 } 
 
+int startingPoint = 0;
+boolean moving = false;
+float direction = 0;
+
+
+
+void keyPressed() {
+  if (key == 'r') {
+    startingPoint = mouseX;
+    moving = true;
+    loop();
+  }
+}
 
 void keyReleased() {
   if (key == 'r') {
-    if (selectedHour<23) {
-      selectedHour += 1;
-    } else {
-      selectedHour = 0;
-    }    
-    redraw();
-  }
-  if (key == CODED) {
-    if (keyCode == SHIFT) {
-      moving = 0;
-      startingPoint=0;
-    }
+    moving = false;
+    noLoop();
   }
 }
 
 int startingPoint = 0;
 int moving = 0;
 
+<<<<<<< HEAD
 void keyPressed() {
   if (key == CODED) {
     if (keyCode == SHIFT) {
@@ -74,6 +78,18 @@ void keyPressed() {
         if ((selectedHour < 22 && moving > 0) || (selectedHour > 0 && moving < 0)) {
           selectedHour+= moving;
         } else if (moving >  0) {
+=======
+void scroll() {
+  //while (moving == true) {
+    println("jei");
+    if (moving) {
+      direction = mouseX-startingPoint;
+      if (direction > 0) { // if mouse is dragged to left
+        startingPoint = mouseX;
+        if (selectedHour<23) {
+          selectedHour += 1;
+        } else {
+>>>>>>> 85caebc79669edc7c429569209d96803dd0b6104
           selectedHour = 0;
         } else {
           selectedHour = 23;
@@ -81,6 +97,11 @@ void keyPressed() {
         redraw();
       }
     }
+<<<<<<< HEAD
   }
+=======
+  //}
+  println("loppu");
+>>>>>>> 85caebc79669edc7c429569209d96803dd0b6104
 }
 
