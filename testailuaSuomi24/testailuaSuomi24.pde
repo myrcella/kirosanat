@@ -52,34 +52,42 @@ void keyPressed() {
   if (key == 'r') {
     startingPoint = mouseX;
     moving = true;
-    loop();
+    //loop();
   }
 }
 
 void keyReleased() {
   if (key == 'r') {
     moving = false;
-    noLoop();
+    //noLoop();
   }
 }
 
 
 void scroll() {
-  if (moving) {
-    direction = mouseX-startingPoint;
-    if (direction > 0) {
-      if (selectedHour<23) {
-        selectedHour += 1;
-      } else {
-        selectedHour = 0;
-      } 
-    }
-    if (direction < 0){
-      if (selectedHour>0) {
-        selectedHour -= 1;
-      } else {
-        selectedHour = 23;
-      }    
+  while (moving == true) {
+    println("jei");
+    if (moving) {
+      direction = mouseX-startingPoint;
+      if (direction > 0) { // if mouse is dragged to left
+        startingPoint = mouseX;
+        if (selectedHour<23) {
+          selectedHour += 1;
+        } else {
+          selectedHour = 0;
+        }
+        drawDetails();
+      } else if (direction < 0) { // if mouse is dragged to right
+        startingPoint = mouseX;
+        if (selectedHour>0) {
+          selectedHour -= 1;
+        } else {
+          selectedHour = 23;
+        }
+        drawDetails();
+      }
     }
   }
+  println("loppu");
 }
+
