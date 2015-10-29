@@ -26,10 +26,11 @@ void setup() {
   strokeWeight(2);
   noFill();
   noLoop();
+  initIntListTotal();
+  initIntListCurses();
 }
 
 void draw() {
-  scroll();
   drawBackground();
   pushMatrix();
   translate(dimension/2, dimension/2+35);
@@ -42,52 +43,44 @@ void draw() {
   drawWordCloud();
 } 
 
-int startingPoint = 0;
-boolean moving = false;
-float direction = 0;
-
-
-
-void keyPressed() {
-  if (key == 'r') {
-    startingPoint = mouseX;
-    moving = true;
-    //loop();
-  }
-}
 
 void keyReleased() {
   if (key == 'r') {
-    moving = false;
-    //noLoop();
+    if (selectedHour<23) {
+      selectedHour += 1;
+    } else {
+      selectedHour = 0;
+    }    
+    redraw();
+  }
+  if (key == CODED) {
+    if (keyCode == SHIFT) {
+      moving = 0;
+      startingPoint=0;
+    }
   }
 }
 
+int startingPoint = 0;
+int moving = 0;
 
-void scroll() {
-  while (moving == true) {
-    println("jei");
-    if (moving) {
-      direction = mouseX-startingPoint;
-      if (direction > 0) { // if mouse is dragged to left
-        startingPoint = mouseX;
-        if (selectedHour<23) {
-          selectedHour += 1;
-        } else {
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == SHIFT) {
+      moving = (int)round((float)(mouseX-startingPoint)/(float)400);          
+      if (moving == 0) {
+        startingPoint=mouseX;
+      } else {
+        if ((selectedHour < 22 && moving > 0) || (selectedHour > 0 && moving < 0)) {
+          selectedHour+= moving;
+        } else if (moving >  0) {
           selectedHour = 0;
-        }
-        drawDetails();
-      } else if (direction < 0) { // if mouse is dragged to right
-        startingPoint = mouseX;
-        if (selectedHour>0) {
-          selectedHour -= 1;
         } else {
           selectedHour = 23;
-        }
-        drawDetails();
+        } 
+        redraw();
       }
     }
   }
-  println("loppu");
 }
 

@@ -23,8 +23,8 @@ import org.json.simple.parser.ParseException;
 
 public class Suomi24Reader {
 
-  private String[] curseArray = {"vittu", "saatana", "helvetti", "perse", "jumalauta", "perkele", "paska", "hemmetti", "helkkari", "hitto", "saakeli"};
-  private String[] ethnicArray = {};
+  private String[] curseArray = {"vittu", "saatana", "helvetti", "jumalauta", "perkele", "paska", "hemmetti", "helkkari", "hitto", "saakeli"};
+  private String[] ethnicArray = {"neekeri", "mutiainen", "manne", "kinkki"};
   private String[] sexualArray = {"homo", "huora", "lutka", "narttu", "bitch",};
   private String[] genericArray = {"", "", "",};
   private Map<Integer, Map<String, Integer>> cursesByTime = new HashMap<Integer, Map<String, Integer>>();
@@ -55,10 +55,10 @@ public class Suomi24Reader {
     makeWordMaps();
     System.out.println(((double)((System.nanoTime() - start)/1000000000.0)));
     for (Integer key: cursesByTime.keySet()) {
-     // System.out.println(totalCurses[key]);
-     // System.out.println(cursesAsPairs.get(key));
-       // System.out.println(totalWords[key]);
-       //   System.out.println(key + "    Enjoy:    " + cursesByTime.get(key));
+      //System.out.println(totalCurses[key]);
+      //System.out.println(cursesAsPairs.get(key));
+      //System.out.println(totalWords[key]);
+      //System.out.println(key + "    Enjoy:    " + cursesByTime.get(key));
     }
 
   }
@@ -80,7 +80,7 @@ public class Suomi24Reader {
     for(String curse: genericArray) {
       generics.put(curse, 0);
     }
-    for(int i = 0; i < 24; i++) {
+    for(Integer i = 0; i < 24; i++) {
       Map <String, Integer> newCurses = new HashMap<String, Integer>();
       Map <String, Integer> newEthnics = new HashMap<String, Integer>();
       Map <String, Integer> newSexuals = new HashMap<String, Integer>();
@@ -124,11 +124,11 @@ public class Suomi24Reader {
 
   private void processInputfile (Map<Integer, Map<String, Integer>> group) {
     try {
-      File dir = new File("E:/Suomi24/2015/01");
-      //File dir = new File("src/testresources");
+      //File dir = new File("E:/Suomi24/2015/01");
+      File dir = new File("/home/saga/git/kirosana/kirosanat/src/testresources");
       File[] directoryListing = dir.listFiles();
       if (directoryListing != null) {
-        int count = 0;
+        Integer count = 0;
         for (File child : directoryListing) {
 
           FileReader reader = new FileReader(child.getPath());
@@ -137,7 +137,7 @@ public class Suomi24Reader {
           JSONObject originalData = (JSONObject)jsonObject.get("data");
           parseText(group, originalData);
           count++;
-          //System.out.println("Parsed file:   " + child.getPath() + "    was file number:   " + count);
+          System.out.println("Parsed file:   " + child.getPath() + "    was file number:   " + count);
         }
       }
     } catch (FileNotFoundException e) {
@@ -162,7 +162,7 @@ public class Suomi24Reader {
     //    System.out.println(timeAsInteger);
     //    System.out.println((String) data.get("body"));
     String[] originalText = ((String) data.get("body")).replace("<p>", " ").split(" "); 
-    for(int i = 0; i < originalText.length; i++) {
+    for(Integer i = 0; i < originalText.length; i++) {
       totalWords[timeAsInteger] += 1;
       if(group.get(timeAsInteger).containsKey(originalText[i].toLowerCase())) {  
         group.get(timeAsInteger).put(originalText[i].toLowerCase(), group.get(timeAsInteger).get(originalText[i].toLowerCase()) + 1);
@@ -170,7 +170,7 @@ public class Suomi24Reader {
     }
     if (data.containsKey("comments")) {
       JSONArray comments = (JSONArray) data.get("comments");
-      for(int i = 0; i < comments.size(); i++) {
+      for(Integer i = 0; i < comments.size(); i++) {
         JSONObject comment = (JSONObject) comments.get(i);
         parseText(group, comment);
       }
@@ -178,7 +178,7 @@ public class Suomi24Reader {
   }
 
   public void calculateTotalCurses() {
-    for(int i= 0; i < 24; i++) {
+    for(Integer i= 0; i < 24; i++) {
       Iterator<Integer> curses = cursesByTime.get(i).values().iterator();
       while(curses.hasNext()) {
         totalCurses[i] += curses.next();
@@ -199,7 +199,7 @@ public class Suomi24Reader {
   }
 
   public void makeWordMaps() {
-    for(int i = 0; i < 24; i++) {
+    for(Integer i = 0; i < 24; i++) {
       for(String key: cursesByTime.get(i).keySet()) {
          cursesAsPairs.get(i).add(new Word(key, cursesByTime.get(i).get(key)));
        // cursesAsPairs.put(i, cursesAsPairs.get(i).add(new Word(key, cursesByTime.get(i).get(key))));
