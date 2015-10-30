@@ -25,8 +25,8 @@ public class Suomi24Reader {
 
   private String[] curseArray = {"vittu", "saatana", "helvetti", "jumalauta", "perkele", "paska", "hemmetti", "helkkari", "hitto", "saakeli"};
   private String[] ethnicArray = {"neekeri", "mutiainen", "manne", "kinkki", "vinosilmä", "mutakuono"};
-  private String[] sexualArray = {"homo", "huora", "lutka", "narttu", "bitch","hutsu", "aivokääpiö"};
-  private String[] genericArray = {"dorka", "kusipää", "paskapää", "nynny", "läski", "idiootti", "imbesilli", "luuseri", "mulkku", "nynnerö"  };
+  private String[] sexualArray = {"homo", "huora", "lutka", "narttu", "bitch","hutsu"};
+  private String[] genericArray = {"dorka", "kusipää", "paskapää", "nynny", "läski", "idiootti", "imbesilli", "luuseri", "mulkku", "nynnerö","aivokääpiö"  };
   private Map<Integer, Map<String, Integer>> cursesByTime = new HashMap<Integer, Map<String, Integer>>();
   private Map<Integer, Map<String, Integer>> ethnicsByTime = new HashMap<Integer, Map<String, Integer>>();
   private Map<Integer, Map<String, Integer>> sexualsByTime = new HashMap<Integer, Map<String, Integer>>();
