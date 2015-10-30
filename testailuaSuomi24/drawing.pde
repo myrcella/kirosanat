@@ -124,9 +124,9 @@ void drawBackground() {
 }
 
 float sunPosY = 0;
-float sunPosX = (wide - radiusOfOuter*2)/2/2;
+float sunPosX = (widthX - radiusOfOuter*2)/2/2;
 float moonPosY = 0;
-float moonPosX = (wide -(wide - radiusOfOuter*2)/2/2);
+float moonPosX = (widthX -(widthX - radiusOfOuter*2)/2/2);
 boolean down = true;
 boolean on = true;
 

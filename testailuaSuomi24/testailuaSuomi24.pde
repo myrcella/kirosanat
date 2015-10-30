@@ -37,12 +37,11 @@ void draw() {
     scale(-1, 1); // mirrors the video picture
     image(cam.get(), -width, 0);
     brightest(); // finds the brightest pixel
-
   }
-
+  drawBackground();
   scroll();
   detectHighest();
-  drawBackground();
+  brightest();
   pushMatrix();
   translate(widthX/2, dimension/2+35);
   rotate(PI - (selectedHour * (PI / 12))); // rotates according to the selected Hour
@@ -52,8 +51,6 @@ void draw() {
   popMatrix();
   drawDetails();
   drawWordCloud();
-  brightest();
-
 } 
 
 float startingPoint = 0;
@@ -68,14 +65,36 @@ void keyPressed() {
     moving = true;
     loop();
   }
+  if (key == 'v') {
+    detectHighest();
+  }
 }
 
 void keyReleased() {
   if (key == 'r') {
     moving = false;
     noLoop();
-    draw();
   }
+  if ( key == 'v' ) { 
+    if (highest > 50) {
+      if (category == 's') {
+        category = 'k';
+      } else if (category == 'r') {
+        category = 's';
+      } else if (category == 'y') {
+        category = 'r';
+      }
+    } else {
+      if (category == 'k') {
+        category = 's';
+      } else if (category == 's') {
+        category = 'r';
+      } else if (category == 'r') {
+        category = 'y';
+      }
+    }
+  }
+  draw();
 }
 
 void scroll() {
