@@ -1,25 +1,28 @@
 import wordcram.*;
 import processing.video.*;
+import ddf.minim.*;
 
 Capture cam;
 //The brightest pixels in the original video, not mirrowed!
 float pointerX = 0;
 float pointerY = 0;
 
-int dimension = 720;
+int heightY = 720;
 int widthX = 1280;
 int radiusOfInner = 200;
-int radiusOfOuter = dimension/2-70;
+int radiusOfOuter = heightY/2-70;
 int selectedHour = 0;
 int maxValue = 190;
-int currentX = 0;
 char category = 'k';
 IntList currentList;
 
-boolean changeHour = false;
+float startingPoint = 0;
+boolean moving = false;
+
+AudioPlayer player;
 
 void setup() {
-  size(widthX, dimension);
+  size(widthX, heightY);
   background(255);
   cam = new Capture(this, width, height);
   cam.start();
@@ -29,6 +32,10 @@ void setup() {
   noLoop();
   detectAudio();
   currentList = curses;
+  minim = new Minim(this);
+  player = minim.loadFile("crowd_milling_about.mp3");
+  player.play();
+  player.loop();
 }
 
 void draw() {
@@ -36,7 +43,6 @@ void draw() {
     // draws the video picture
     cam.read();
     cam.loadPixels();
-    //scale(-1, 1); // mirrors the video picture
     image(cam.get(), -width, 0);
     reddest(); // finds the brightest pixel
   }
@@ -45,7 +51,7 @@ void draw() {
   detectHighest();
   reddest();
   pushMatrix();
-  translate(widthX/2, dimension/2+35);
+  translate(widthX/2, heightY/2+35);
   rotate(PI - (selectedHour * (PI / 12))); // rotates according to the selected Hour
   drawTotalWords();
   drawTotalCurses();
@@ -53,14 +59,7 @@ void draw() {
   popMatrix();
   drawDetails();
   drawWordCloud();
-  //println(brightestX);
 } 
-
-float startingPoint = 0;
-boolean moving = false;
-float direction = 0;
-
-
 
 void keyPressed() {
   if (key == 'r') {
@@ -69,6 +68,7 @@ void keyPressed() {
     loop();
   }
   if (key == 'v') {
+    player.pause();
     detectHighest();
     loop();
   }
@@ -79,6 +79,7 @@ void keyReleased() {
     moving = false;
   }
   if ( key == 'v' ) { 
+    player.play();
     if (highest > 50) {
       if (category == 's') {
         category = 'k';
@@ -103,18 +104,19 @@ void keyReleased() {
 
 void scroll() {
   if (moving) {
-    direction = pointerX-startingPoint;
-    if (direction > 0) { // if mouse is dragged to left
+    if (pointerX-startingPoint > 50) { // if red object is dragged to right
       startingPoint = pointerX;
       if (selectedHour<23) {
         selectedHour += 1;
+        println(selectedHour);
       } else {
         selectedHour = 0;
       }
-    } else if (direction < 0) { // if mouse is dragged to right
+    } else if (pointerX-startingPoint < -50) { // if red object is dragged to left
       startingPoint = pointerX;
       if (selectedHour>0) {
         selectedHour -= 1;
+        println(selectedHour);
       } else {
         selectedHour = 23;
       }

@@ -54,43 +54,43 @@ void drawDetails() {
   strokeWeight(3);
   stroke(200);
   fill(200);
-  triangle(widthX/2-8, 90, widthX/2+8, 90, widthX/2, dimension/2-radiusOfInner+50); //voi olla myös 80 alimman pisteen y
+  triangle(widthX/2-8, 90, widthX/2+8, 90, widthX/2, heightY/2-radiusOfInner+50); //voi olla myös 80 alimman pisteen y
   strokeWeight(2);
   textSize(32);
   text(selectedHour+":00", widthX/2-25, 60); 
   textSize(20);
   fill(color(178, 223, 147));
-  text("SANOJA: "+words.get(selectedHour), 20, dimension-80); 
+  text("SANOJA: "+words.get(selectedHour), 20, heightY-80); 
   fill(color(188, 225, 255));
-  text("VIHAMIELISTÄ: "+currentList.get(selectedHour), 20, dimension -50); 
+  text("VIHAMIELISTÄ: "+currentList.get(selectedHour), 20, heightY -50); 
   if (category == 'k') {
     fill(color(178, 223, 147));
-    text("KIROSANAT", widthX-180, dimension -140); 
+    text("KIROSANAT", widthX-180, heightY -140); 
     fill(color(188, 225, 255));
-    text("YLEISET", widthX-180, dimension -50); 
-    text("RASISMI", widthX-180, dimension -80);
-    text("SEKSUAALISET", widthX-180, dimension -110);
+    text("YLEISET", widthX-180, heightY -50); 
+    text("RASISMI", widthX-180, heightY -80);
+    text("SEKSUAALISET", widthX-180, heightY -110);
   } else if (category == 's') {
     fill(color(178, 223, 147));
-    text("SEKSUAALISET", widthX-180, dimension -110);
+    text("SEKSUAALISET", widthX-180, heightY -110);
     fill(color(188, 225, 255));
-    text("YLEISET", widthX-180, dimension -50); 
-    text("RASISMI", widthX-180, dimension -80);
-    text("KIROSANAT", widthX-180, dimension -140);
+    text("YLEISET", widthX-180, heightY -50); 
+    text("RASISMI", widthX-180, heightY -80);
+    text("KIROSANAT", widthX-180, heightY -140);
   } else if (category == 'r') {
     fill(color(178, 223, 147));
-    text("RASISMI", widthX-180, dimension -80);
+    text("RASISMI", widthX-180, heightY -80);
     fill(color(188, 225, 255));
-    text("YLEISET", widthX-180, dimension -50); 
-    text("KIROSANAT", widthX-180, dimension -140);
-    text("SEKSUAALISET", widthX-180, dimension -110);
+    text("YLEISET", widthX-180, heightY -50); 
+    text("KIROSANAT", widthX-180, heightY -140);
+    text("SEKSUAALISET", widthX-180, heightY -110);
   } else if (category == 'y') {
     fill(color(178, 223, 147));
-    text("YLEISET", widthX-180, dimension -50); 
+    text("YLEISET", widthX-180, heightY -50); 
     fill(color(188, 225, 255));
-    text("KIROSANAT", widthX-180, dimension -140);
-    text("RASISMI", widthX-180, dimension -80);
-    text("SEKSUAALISET", widthX-180, dimension -110);
+    text("KIROSANAT", widthX-180, heightY -140);
+    text("RASISMI", widthX-180, heightY -80);
+    text("SEKSUAALISET", widthX-180, heightY -110);
   }
   noFill();
 }
