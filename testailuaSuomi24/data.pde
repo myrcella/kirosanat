@@ -8,8 +8,6 @@ void initIntListTotal() {
   for (Integer number : totalWords) {
     words.append(number.intValue());
   }
-println(totalWords);
-println(words);
 }
 
 Integer[] totalCurses = reader.getTotalCurses();
@@ -19,5 +17,30 @@ void initIntListCurses() {
   for (Integer number : totalCurses) {
     curses.append(number.intValue());
   }
+}
+
+Integer[] totalEthnics = reader.getTotalEthnics();
+IntList ethnics = new IntList();
+
+void initIntListEthnics() {
+  for (Integer number : totalEthnics) {
+    ethnics.append(number.intValue());
+  }
+}
+
+Integer[] totalSexuals = reader.getTotalSexuals();
+IntList sexuals = new IntList();
+
+void initIntListSexuals() {
+  for (Integer number : totalSexuals) {
+    sexuals.append(number.intValue());
+  }
+}
+
+void initData() {
+  initIntListTotal();
+  initIntListCurses();
+  initIntListSexuals();
+  initIntListEthnics();
 }
 

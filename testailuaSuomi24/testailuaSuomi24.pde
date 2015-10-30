@@ -26,12 +26,10 @@ void setup() {
   strokeWeight(2);
   noFill();
   noLoop();
-  initIntListTotal();
-  initIntListCurses();
+  initData();
 }
 
 void draw() {
-  scroll();
   drawBackground();
   pushMatrix();
   translate(dimension/2, dimension/2+35);
@@ -41,7 +39,7 @@ void draw() {
   drawCircles();
   popMatrix();
   drawDetails();
-  if (!moving) drawWordCloud();
+  drawWordCloud();
 } 
 
 int startingPoint = 0;
@@ -62,7 +60,6 @@ void keyReleased() {
   if (key == 'r') {
     moving = false;
     noLoop();
-    draw();
   }
 }
 
@@ -85,5 +82,4 @@ void scroll() {
       }
     }
   }
-  drawWordCloud();
 }
