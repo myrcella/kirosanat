@@ -24,9 +24,9 @@ import org.json.simple.parser.ParseException;
 public class Suomi24Reader {
 
   private String[] curseArray = {"vittu", "saatana", "helvetti", "jumalauta", "perkele", "paska", "hemmetti", "helkkari", "hitto", "saakeli"};
-  private String[] ethnicArray = {"neekeri", "mutiainen", "manne", "kinkki"};
-  private String[] sexualArray = {"homo", "huora", "lutka", "narttu", "bitch",};
-  private String[] genericArray = {"", "", "",};
+  private String[] ethnicArray = {"neekeri", "mutiainen", "manne", "kinkki", "vinosilmä", "mutakuono"};
+  private String[] sexualArray = {"homo", "huora", "lutka", "narttu", "bitch","hutsu"};
+  private String[] genericArray = {"dorka", "kusipää", "paskapää", "nynny", "läski", "idiootti", "imbesilli", "luuseri", "mulkku", "nynnerö","aivokääpiö"  };
   private Map<Integer, Map<String, Integer>> cursesByTime = new HashMap<Integer, Map<String, Integer>>();
   private Map<Integer, Map<String, Integer>> ethnicsByTime = new HashMap<Integer, Map<String, Integer>>();
   private Map<Integer, Map<String, Integer>> sexualsByTime = new HashMap<Integer, Map<String, Integer>>();
@@ -95,7 +95,7 @@ public class Suomi24Reader {
   private void processInputfile (Map<Integer, Map<String, Integer>> group) {
     try {
       //File dir = new File("E:/Suomi24/2015/01");
-      File dir = new File("/home/saga/Suomi24_2015_10_01/2015/01");
+      File dir = new File("/home/saga/Suomi24_2015_10_01/2015/01"); //("/home/saga/Suomi24_2015_10_01/2015/01")
       File[] directoryListing = dir.listFiles();
       if (directoryListing != null) {
         Integer count = 0;
