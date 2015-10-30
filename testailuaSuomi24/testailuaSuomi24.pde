@@ -6,7 +6,7 @@ Capture cam;
 float brightestX = 0;
 float brightestY = 0;
 
-int dimension = 960;
+int dimension = 720;
 int widthX = 1280;
 int radiusOfInner = 200;
 int radiusOfOuter = dimension/2-70;
@@ -51,6 +51,7 @@ void draw() {
   popMatrix();
   drawDetails();
   drawWordCloud();
+  //println(brightestX);
 } 
 
 float startingPoint = 0;
@@ -67,13 +68,13 @@ void keyPressed() {
   }
   if (key == 'v') {
     detectHighest();
+    loop();
   }
 }
 
 void keyReleased() {
   if (key == 'r') {
     moving = false;
-    noLoop();
   }
   if ( key == 'v' ) { 
     if (highest > 50) {
@@ -94,6 +95,7 @@ void keyReleased() {
       }
     }
   }
+  noLoop();
   draw();
 }
 
