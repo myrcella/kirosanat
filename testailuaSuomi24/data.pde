@@ -1,5 +1,5 @@
 
-Suomi24Reader reader = new Suomi24Reader();
+/*Suomi24Reader reader = new Suomi24Reader();
 
 Integer[] totalWords = reader.getTotalGenerics();
 IntList words = new IntList();
@@ -42,5 +42,23 @@ void initData() {
   initIntListCurses();
   initIntListSexuals();
   initIntListEthnics();
-}
+}*/
+
+
+int[] totalWords = new int[] {
+  100, 180, 100, 80, 120, 100, 160, 170, 110, 70, 140, 140, 100, 180, 100, 80, 120, 100, 160, 170, 110, 70, 180, 140
+};
+IntList words = new IntList(totalWords);
+
+int[] totalCurses = new int[] {
+  10, 20, 7, 25, 5, 2, 27, 5, 25, 30, 18, 12, 10, 20, 7, 25, 5, 2, 27, 5, 25, 30, 18, 12
+};
+IntList curses = new IntList(totalCurses);
+
+int[] totalEthics = new int[] {
+  5, 2, 10, 3, 7, 15, 2, 25, 10, 8, 13, 7,5, 2, 10, 3, 7, 15, 2, 25, 10, 8, 13, 7
+};
+IntList ethics = new IntList(totalEthics);
+
+
 

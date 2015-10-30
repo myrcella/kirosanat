@@ -1,10 +1,4 @@
 import wordcram.*;
-import processing.video.*;
-
-Capture cam;
-//The brightest pixels in the original video, not mirrowed!
-float brightestX = 0;
-float brightestY = 0;
 
 
 int dimension = 800;
@@ -20,16 +14,17 @@ boolean changeHour = false;
 void setup() {
   size(dimension, dimension);
   background(255);
-  //cam = new Capture(this, width, height);
-  //cam.start();
   stroke(0);
   strokeWeight(2);
   noFill();
   noLoop();
-  initData();
+  //initData();
+  detectAudio();
 }
 
 void draw() {
+  scroll();
+  detectHighest();
   drawBackground();
   pushMatrix();
   translate(dimension/2, dimension/2+35);
@@ -49,32 +44,40 @@ float direction = 0;
 
 
 void keyPressed() {
-  if (key == 'r') {
-    startingPoint = mouseX;
+  loop();
+  if (keyCode == CONTROL) {
+    startingPoint = highest;
     moving = true;
-    loop();
   }
 }
 
 void keyReleased() {
-  if (key == 'r') {
+  noLoop();
+  if (keyCode == CONTROL) {
     moving = false;
-    noLoop();
+  }
+  if ( key == 'v' ) { 
+    println(highest);
+    if (highest>50) {
+      println("up");
+    } else {
+      println("down");
+    }
   }
 }
 
 void scroll() {
   if (moving) {
-    direction = mouseX-startingPoint;
+    direction = highest-startingPoint;
     if (direction > 0) { // if mouse is dragged to left
-      startingPoint = mouseX;
+      startingPoint = highest;
       if (selectedHour<23) {
         selectedHour += 1;
       } else {
         selectedHour = 0;
       }
     } else if (direction < 0) { // if mouse is dragged to right
-      startingPoint = mouseX;
+      startingPoint = highest;
       if (selectedHour>0) {
         selectedHour -= 1;
       } else {
@@ -83,3 +86,4 @@ void scroll() {
     }
   }
 }
+
