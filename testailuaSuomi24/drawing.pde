@@ -30,11 +30,11 @@ void drawTotalCurses() {
   fill(color(188, 225, 255));
   stroke(color(188, 225, 255));
   beginShape();
-  for (int i=0; i<curses.size (); i++) {
-    curveVertex(sin((TWO_PI/curses.size())*i)*(scaleValue(curses.get(i))+radiusOfInner), cos((TWO_PI/curses.size())*i)*(scaleValue(curses.get(i))+radiusOfInner));
+  for (int i=0; i<currentList.size (); i++) {
+    curveVertex(sin((TWO_PI/currentList.size())*i)*(scaleValue(currentList.get(i))+radiusOfInner), cos((TWO_PI/currentList.size())*i)*(scaleValue(currentList.get(i))+radiusOfInner));
   }
   for (int i=0; i<3; i++) {
-    curveVertex(sin((TWO_PI/curses.size())*i)*(scaleValue(curses.get(i))+radiusOfInner), cos((TWO_PI/curses.size())*i)*(scaleValue(curses.get(i))+radiusOfInner));
+    curveVertex(sin((TWO_PI/currentList.size())*i)*(scaleValue(currentList.get(i))+radiusOfInner), cos((TWO_PI/currentList.size())*i)*(scaleValue(currentList.get(i))+radiusOfInner));
   }
   endShape();
   stroke(0);
@@ -62,7 +62,7 @@ void drawDetails() {
   fill(color(178, 223, 147));
   text("SANOJA: "+words.get(selectedHour), 20, dimension-80); 
   fill(color(188, 225, 255));
-  text("KIROSANOJA: "+curses.get(selectedHour), 20, dimension -50); 
+  text("VIHAMIELISTÄ: "+currentList.get(selectedHour), 20, dimension -50); 
   if (category == 'k') {
     fill(color(178, 223, 147));
     text("KIROSANAT", widthX-180, dimension -140); 

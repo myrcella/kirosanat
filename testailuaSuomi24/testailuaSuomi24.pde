@@ -14,6 +14,7 @@ int selectedHour = 0;
 int maxValue = 190;
 int currentX = 0;
 char category = 'k';
+IntList currentList;
 
 boolean changeHour = false;
 
@@ -27,6 +28,7 @@ void setup() {
   noFill();
   noLoop();
   detectAudio();
+  currentList = curses;
 }
 
 void draw() {
