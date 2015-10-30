@@ -13,8 +13,8 @@ void detectAudio() {
 }
 
 void detectHighest() {
+  highest = 0;
   fft.forward(in.left);
-  highest=0;
   for (int n = 0; n < fft.specSize (); n++) {
     if (fft.getBand(n)>fft.getBand(highest))
       highest=n;
