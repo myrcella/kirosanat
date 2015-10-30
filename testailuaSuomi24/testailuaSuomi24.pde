@@ -3,8 +3,8 @@ import processing.video.*;
 
 Capture cam;
 //The brightest pixels in the original video, not mirrowed!
-float brightestX = 0;
-float brightestY = 0;
+float pointerX = 0;
+float pointerY = 0;
 
 int dimension = 720;
 int widthX = 1280;
@@ -36,14 +36,14 @@ void draw() {
     // draws the video picture
     cam.read();
     cam.loadPixels();
-    scale(-1, 1); // mirrors the video picture
+    //scale(-1, 1); // mirrors the video picture
     image(cam.get(), -width, 0);
-    brightest(); // finds the brightest pixel
+    reddest(); // finds the brightest pixel
   }
   drawBackground();
   scroll();
   detectHighest();
-  brightest();
+  reddest();
   pushMatrix();
   translate(widthX/2, dimension/2+35);
   rotate(PI - (selectedHour * (PI / 12))); // rotates according to the selected Hour
@@ -64,7 +64,7 @@ float direction = 0;
 
 void keyPressed() {
   if (key == 'r') {
-    startingPoint = brightestX;
+    startingPoint = pointerX;
     moving = true;
     loop();
   }
@@ -103,16 +103,16 @@ void keyReleased() {
 
 void scroll() {
   if (moving) {
-    direction = brightestX-startingPoint;
+    direction = pointerX-startingPoint;
     if (direction > 0) { // if mouse is dragged to left
-      startingPoint = brightestX;
+      startingPoint = pointerX;
       if (selectedHour<23) {
         selectedHour += 1;
       } else {
         selectedHour = 0;
       }
     } else if (direction < 0) { // if mouse is dragged to right
-      startingPoint = brightestX;
+      startingPoint = pointerX;
       if (selectedHour>0) {
         selectedHour -= 1;
       } else {
