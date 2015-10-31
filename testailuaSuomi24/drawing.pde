@@ -119,13 +119,20 @@ void drawBackground() {
 
 }
 
-
-float sunPosY = 0;
-float sunPosX = (widthX - radiusOfOuter*2)/2/2;
-float moonPosY = 0;
-float moonPosX = (widthX -(widthX - radiusOfOuter*2)/2/2);
+float sunPosY = heightY/2 - 100;
+float sunPosX = widthX/4 - 240;
+float moonPosY = heightY/2 - 100;
+float moonPosX = 3* (widthX/4);
 boolean down = true;
 boolean on = true;
+
+void drawSunAndMoon() {
+  if (selectedHour >= 6 && selectedHour <= 18) {
+    image(a, sunPosX, sunPosY, 240, 200);
+  } else {
+    image(b, moonPosX, moonPosY, 240, 200);
+  }
+}
 
 int scaleValue(int number) {
   return round(((float)number/(float)maxValue)*((float)radiusOfOuter-(float)radiusOfInner));

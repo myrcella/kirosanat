@@ -18,6 +18,8 @@ IntList currentList;
 
 float startingPoint = 0;
 boolean moving = false;
+PImage a;
+PImage b;
 
 AudioPlayer player;
 
@@ -37,6 +39,9 @@ void setup() {
   player.play();
   player.loop();
   initData();
+  
+  a = loadImage("aurinko1.png");
+  b = loadImage("kuu1.png");
 }
 
 void draw() {
@@ -60,6 +65,8 @@ void draw() {
   drawDetails();
   drawWordCloud();
   playWords();
+  drawSunAndMoon();
+  
 } 
 
 void keyPressed() {
@@ -124,8 +131,8 @@ void scroll() {
 }
 
 void playWords() {
-  for (int i=1; i<words.size (); i++) {
-      player.setGain((words.get(i)/words.get(i-1)));
+  for (int i=0; i<words.size (); i++) {
+      player.setGain(words.get(i)/float(1000000));
   }
 }
 
