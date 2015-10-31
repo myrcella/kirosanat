@@ -1,7 +1,7 @@
 
-/*Suomi24Reader reader = new Suomi24Reader();
+Suomi24Reader reader = new Suomi24Reader();
 
-Integer[] totalWords = reader.getTotalGenerics();
+Integer[] totalWords = reader.getTotalWords();
 IntList words = new IntList();
 
 void initIntListTotal() {
@@ -10,8 +10,19 @@ void initIntListTotal() {
   }
 }
 
+Integer[] totalGenerics = reader.getTotalGenerics();
+IntList generics = new IntList();
+Map<Integer, ArrayList<Word>> genericWordCloud = reader.getGenerics(); 
+
+void initIntListGenerics() {
+  for (Integer number : totalGenerics) {
+    generics.append(number.intValue());
+  }
+}
+
 Integer[] totalCurses = reader.getTotalCurses();
 IntList curses = new IntList();
+Map<Integer, ArrayList<Word>> curseWordCloud = reader.getCurses();
 
 void initIntListCurses() {
   for (Integer number : totalCurses) {
@@ -21,6 +32,7 @@ void initIntListCurses() {
 
 Integer[] totalEthnics = reader.getTotalEthnics();
 IntList ethnics = new IntList();
+Map<Integer, ArrayList<Word>> ethnicWordCloud = reader.getEthnics();
 
 void initIntListEthnics() {
   for (Integer number : totalEthnics) {
@@ -30,6 +42,7 @@ void initIntListEthnics() {
 
 Integer[] totalSexuals = reader.getTotalSexuals();
 IntList sexuals = new IntList();
+Map<Integer, ArrayList<Word>> sexualWordCloud = reader.getSexuals();
 
 void initIntListSexuals() {
   for (Integer number : totalSexuals) {
@@ -39,26 +52,23 @@ void initIntListSexuals() {
 
 void initData() {
   initIntListTotal();
+  initIntListGenerics();
   initIntListCurses();
   initIntListSexuals();
   initIntListEthnics();
-}*/
+}
 
-
-int[] totalWords = new int[] {
-  100, 180, 100, 80, 120, 100, 160, 170, 110, 70, 140, 140, 100, 180, 100, 80, 120, 100, 160, 170, 110, 70, 180, 140
-};
-IntList words = new IntList(totalWords);
-
-int[] totalCurses = new int[] {
-  10, 20, 7, 25, 5, 2, 27, 5, 25, 30, 18, 12, 10, 20, 7, 25, 5, 2, 27, 5, 25, 30, 18, 12
-};
-IntList curses = new IntList(totalCurses);
-
-int[] totalEthics = new int[] {
-  5, 2, 10, 3, 7, 15, 2, 25, 10, 8, 13, 7,5, 2, 10, 3, 7, 15, 2, 25, 10, 8, 13, 7
-};
-IntList ethics = new IntList(totalEthics);
-
-
-
+Word[] pickWordArray(char cat, int hour) {
+  switch (cat) {
+    case 's':
+      return sexualWordCloud.get(hour).toArray(new Word[sexualWordCloud.get(hour).size()]);
+    case 'y':
+      return genericWordCloud.get(hour).toArray(new Word[genericWordCloud.get(hour).size()]);
+    case 'k':
+      return curseWordCloud.get(hour).toArray(new Word[curseWordCloud.get(hour).size()]);
+    case 'r':
+      return ethnicWordCloud.get(hour).toArray(new Word[ethnicWordCloud.get(hour).size()]);
+    default:
+      return new Word[0];
+   }
+}

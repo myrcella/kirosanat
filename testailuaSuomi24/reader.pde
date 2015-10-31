@@ -166,16 +166,24 @@ public class Suomi24Reader {
   public void makeWordMaps() {
     for(Integer i = 0; i < 24; i++) {
       for(String key: cursesByTime.get(i).keySet()) {
-         cursesAsPairs.get(i).add(new Word(key, cursesByTime.get(i).get(key)));
+        if(cursesByTime.get(i).get(key) > 0) {
+           cursesAsPairs.get(i).add(new Word(key, cursesByTime.get(i).get(key)));
+        }
       }
       for(String key: ethnicsByTime.get(i).keySet()) {
-        ethnicsAsPairs.get(i).add(new Word(key, ethnicsByTime.get(i).get(key)));
+        if(ethnicsByTime.get(i).get(key) > 0) {
+          ethnicsAsPairs.get(i).add(new Word(key, ethnicsByTime.get(i).get(key)));
+        }
       }
       for(String key: sexualsByTime.get(i).keySet()) {
-        sexualsAsPairs.get(i).add(new Word(key, sexualsByTime.get(i).get(key)));
+        if(sexualsByTime.get(i).get(key) > 0) {
+          sexualsAsPairs.get(i).add(new Word(key, sexualsByTime.get(i).get(key)));
+        }
       }
       for(String key: genericsByTime.get(i).keySet()) {
-        genericsAsPairs.get(i).add(new Word(key, genericsByTime.get(i).get(key)));
+        if(genericsByTime.get(i).get(key) > 0) {
+          genericsAsPairs.get(i).add(new Word(key, genericsByTime.get(i).get(key)));
+        }
       }
     }
   }

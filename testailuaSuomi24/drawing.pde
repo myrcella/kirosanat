@@ -42,8 +42,9 @@ void drawTotalCurses() {
 }
 
 void drawWordCloud() {
+  Word[] wordArr = pickWordArray(category, selectedHour);
   WordCram wordcram = new WordCram(this)
-    .fromWords(wordArray)
+    .fromWords(wordArr)
       .withColors(color(124, 175, 250))
         .withPlacer(middle());
   wordcram.drawAll();

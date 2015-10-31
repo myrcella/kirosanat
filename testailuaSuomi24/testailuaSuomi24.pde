@@ -36,6 +36,7 @@ void setup() {
   player = minim.loadFile("crowd_milling_about.mp3");
   player.play();
   player.loop();
+  initData();
 }
 
 void draw() {
@@ -108,7 +109,6 @@ void scroll() {
       startingPoint = pointerX;
       if (selectedHour<23) {
         selectedHour += 1;
-        println(selectedHour);
       } else {
         selectedHour = 0;
       }
@@ -116,7 +116,6 @@ void scroll() {
       startingPoint = pointerX;
       if (selectedHour>0) {
         selectedHour -= 1;
-        println(selectedHour);
       } else {
         selectedHour = 23;
       }
