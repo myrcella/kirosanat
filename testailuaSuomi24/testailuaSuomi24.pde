@@ -52,7 +52,7 @@ void draw() {
   detectHighest();
   reddest();
   pushMatrix();
-  translate(widthX/2, heightY/2+35);
+  translate(widthX/2, heightY/2);
   rotate(TWO_PI - (selectedHour * (TWO_PI / 24))); // rotates according to the selected Hour
   drawTotalCurses();
   drawCircles();

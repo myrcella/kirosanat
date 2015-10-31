@@ -47,13 +47,15 @@ void drawDetails() {
   strokeWeight(3);
   stroke(200);
   fill(200);
-  triangle(widthX/2-8, 90, widthX/2+8, 90, widthX/2, heightY/2-radiusOfInner+50); //voi olla myös 80 alimman pisteen y
+  triangle(widthX/2-8, 60, widthX/2+8, 60, widthX/2, heightY/2-radiusOfInner+15); //voi olla myös 80 alimman pisteen y
   strokeWeight(2);
   textSize(32);
-  text(selectedHour+":00", widthX/2-25, 60); 
+  text(selectedHour+":00", widthX/2-35, 45); 
   textSize(20);
+  text(((selectedHour+6)%24)+":00", (3 * widthX/4-8), heightY/2+7);
+  text(((selectedHour+12)%24)+":00", widthX/2-35, (heightY - 30)); 
+  text(((selectedHour+18)%24)+":00", widthX/4-44, heightY/2+7);
   fill(color(178, 223, 147));
-  println(selectedHour); // Debugging line
   text("SANOJA: "+words.get(selectedHour), 20, heightY-80); 
   fill(color(188, 225, 255));
   text("VIHAMIELISTÄ: "+currentList.get(selectedHour), 20, heightY -50); 
