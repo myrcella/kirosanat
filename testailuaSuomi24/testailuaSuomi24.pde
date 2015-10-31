@@ -59,6 +59,7 @@ void draw() {
   popMatrix();
   drawDetails();
   drawWordCloud();
+  playWords();
 } 
 
 void keyPressed() {
@@ -119,6 +120,12 @@ void scroll() {
         selectedHour = 23;
       }
     }
+  }
+}
+
+void playWords() {
+  for (int i=1; i<words.size (); i++) {
+      player.setGain((words.get(i)/words.get(i-1)));
   }
 }
 
