@@ -9,10 +9,10 @@ float pointerY = 0;
 
 int heightY = 720;
 int widthX = 1280;
-int radiusOfInner = 200;
+int radiusOfInner = 180;
 int radiusOfOuter = heightY/2-70;
 int selectedHour = 0;
-int maxValue = 190;
+int maxValue = 0;
 char category = 'k';
 IntList currentList;
 
@@ -53,8 +53,7 @@ void draw() {
   reddest();
   pushMatrix();
   translate(widthX/2, heightY/2+35);
-  rotate(PI - (selectedHour * (PI / 12))); // rotates according to the selected Hour
-  drawTotalWords();
+  rotate(TWO_PI - (selectedHour * (TWO_PI / 24))); // rotates according to the selected Hour
   drawTotalCurses();
   drawCircles();
   popMatrix();

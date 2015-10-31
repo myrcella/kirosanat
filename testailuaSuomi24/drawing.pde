@@ -11,21 +11,13 @@ Sininen(11, 95, 197)
  harmaa (225, 225, 225)
  */
 
-void drawTotalWords() {
-  //Total amount of words
-  stroke(color(103, 194, 39));
-  beginShape();
-  for (int i=0; i<words.size (); i++) {
-    curveVertex(sin((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner), cos((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner));
-  }
-  for (int i=0; i<3; i++) {
-    curveVertex(sin((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner), cos((TWO_PI/words.size())*i)*(scaleValue(words.get(i))+radiusOfInner));
-  }
-  endShape();
-  stroke(0);
-}
-
 void drawTotalCurses() {
+  for (int i=0; i<currentList.size (); i++) {
+    int current = currentList.get(i);
+    if (current > maxValue){
+      maxValue = current;
+    }
+  }
   //Total amount of curses
   fill(color(188, 225, 255));
   stroke(color(188, 225, 255));
@@ -61,6 +53,7 @@ void drawDetails() {
   text(selectedHour+":00", widthX/2-25, 60); 
   textSize(20);
   fill(color(178, 223, 147));
+  println(selectedHour); // Debugging line
   text("SANOJA: "+words.get(selectedHour), 20, heightY-80); 
   fill(color(188, 225, 255));
   text("VIHAMIELISTÄ: "+currentList.get(selectedHour), 20, heightY -50); 
@@ -123,6 +116,7 @@ void drawBackground() {
   }
 
 }
+
 
 float sunPosY = 0;
 float sunPosX = (widthX - radiusOfOuter*2)/2/2;
